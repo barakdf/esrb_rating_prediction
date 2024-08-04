@@ -69,7 +69,7 @@ dmypy.json
 *.old
 
 # Environment variables
-.env
+src/.env
 
 # Data files
 data/*.csv
