@@ -145,27 +145,41 @@ def main():
     save_new_datasets(train_description_based_df, test_description_based_df, train_original_filtered_df,
                       test_original_filtered_df)
 
+    verify_esrb_rating_distribution()
+
+
 
 def verify_esrb_rating_distribution():
+    # get all the files from the processed data directory
+    # Load the new datasets
+    train_description_based_df = pd.read_csv(f'{processed_data_dir}/train_description_based_esrb_dataset.csv')
+    test_description_based_df = pd.read_csv(f'{processed_data_dir}/test_description_based_esrb_dataset.csv')
     train_original_filtered_df = pd.read_csv(f'{processed_data_dir}/train_original_filtered_esrb_dataset.csv')
     test_original_filtered_df = pd.read_csv(f'{processed_data_dir}/test_original_filtered_esrb_dataset.csv')
 
-    train_description_based_df = pd.read_csv(f'{processed_data_dir}/train_description_based_esrb_dataset.csv')
-    test_description_based_df = pd.read_csv(f'{processed_data_dir}/test_description_based_esrb_dataset.csv')
+    original_rating_distribution_train = train_original_filtered_df['esrb_rating'].value_counts(normalize=True)
+    new_rating_distribution_train = train_description_based_df['esrb_rating'].value_counts(normalize=True)
 
-    # check the distribution of ESRB ratings
-    print("Train original filtered ESRB dataset:")
-    print(train_original_filtered_df['esrb_rating'].value_counts())
-    print()
-    print("Train description based ESRB dataset:")
-    print(train_description_based_df['esrb_rating'].value_counts())
-    print()
-    print("Test original filtered ESRB dataset:")
-    print(test_original_filtered_df['esrb_rating'].value_counts())
-    print()
-    print("Test description based ESRB dataset:")
-    print(test_description_based_df['esrb_rating'].value_counts())
+    original_rating_distribution_test = test_original_filtered_df['esrb_rating'].value_counts(normalize=True)
+    new_rating_distribution_test = test_description_based_df['esrb_rating'].value_counts(normalize=True)
+
+    # Verify the distribution of ESRB ratings
+    print("Verifying the distribution of ESRB ratings...")
+
+    print("\nOriginal Training Rating Distribution:")
+    print(original_rating_distribution_train)
+
+    print("\nNew Training Rating Distribution:")
+    print(new_rating_distribution_train)
+
+    print("\nOriginal Test Rating Distribution:")
+    print(original_rating_distribution_test)
+
+    print("\nNew Test Rating Distribution:")
+    print(new_rating_distribution_test)
 
 
 if __name__ == "__main__":
-    main()
+    # main()
+
+    verify_esrb_rating_distribution()
