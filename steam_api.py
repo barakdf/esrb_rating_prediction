@@ -134,12 +134,4 @@ def collect_game_data(app_ids):
     return game_details
 
 
-if __name__ == "__main__":
-    # Example usage:
-    all_apps = get_all_apps()
-    sample_app_ids = [app['appid'] for app in all_apps[:100]]  # Take first 100 app IDs for example
-    game_data = collect_game_data(sample_app_ids)
 
-    # Printing the collected game data for verification
-    for game in game_data:
-        print(game)

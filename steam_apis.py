@@ -9,6 +9,8 @@ import sys
 processed_data_dir = 'data/processed'
 apps_list_file_path = 'data/all_apps.csv'
 descriptions_file_path = 'data/games_descriptions.csv'
+steam_api_details_file_path = 'data/steam_api_details_all_games.csv'
+
 
 
 def load_esrb_datasets():
@@ -59,7 +61,8 @@ def get_game_descriptions(app_ids, delay=1, retries=3):
                 try:
                     sys.stdout.write(f"\rFetching details for app_id {app_id} ({idx + 1}/{total_apps})...")
                     sys.stdout.flush()
-                    details = get_app_details(int(app_id))
+                    # details = get_app_details(int(app_id))
+                    details = get_app_details(app_id)
                     if details:
                         cleaned_description = clean_html(details.get('about_the_game', 'N/A'))
                         descriptions.append({
@@ -179,7 +182,3 @@ def verify_esrb_rating_distribution():
 
     print("\nNew Test Rating Distribution:")
     print(new_rating_distribution_test)
-
-
-if __name__ == "__main__":
-    main()
